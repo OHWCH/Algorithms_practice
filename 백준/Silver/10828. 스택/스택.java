@@ -3,72 +3,65 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.LinkedList;
 
-class LinkedListQueue{
-    LinkedList<Integer> Queue;
+class LinkedListStack{
+    private LinkedList<Integer> stack;
 
-    public LinkedListQueue(){
-        Queue = new LinkedList<>();
+
+    public LinkedListStack(){
+        stack = new LinkedList<>();
     }
 
-    public void push(int x){
-        Queue.addLast(x);
+    void push(int x){
+        stack.addFirst(x);
     }
 
-    public void pop(){
-        if(Queue.isEmpty()) System.out.println(-1);
-        else {
-            System.out.println(Queue.peek());
-            Queue.removeFirst();
-             }
+    void pop(){
+        if(stack.isEmpty() == true) System.out.println(-1);
+        else
+        {
+            System.out.println(stack.peek());
+            stack.removeFirst();
+        }
     }
 
-    public void size(){
-        System.out.println(Queue.size());
+    void size(){
+        System.out.println(stack.size());
     }
 
-    public void empty(){
-        if (Queue.isEmpty()) System.out.println(1);
+    void empty(){
+        if(stack.isEmpty() == true) System.out.println(1);
         else System.out.println(0);
     }
 
-    public void front(){
-        if(Queue.isEmpty()) System.out.println(-1);
-        else System.out.println(Queue.peek());
-    }
-
-    public void back(){
-        if(Queue.isEmpty()) System.out.println(-1);
-        else System.out.println(Queue.peekLast());
+    void top(){
+        if(stack.isEmpty() == true) System.out.println(-1);
+        else System.out.println(stack.peek());
     }
 }
 
-public class Main {
-    public static void main(String[] args) throws IOException {
+public class Main{
+    public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        LinkedListStack stack = new LinkedListStack();
         int n = Integer.parseInt(br.readLine());
-        LinkedListQueue queue = new LinkedListQueue();
+        for(int i = 0; i < n; i++){
+            String[] line = br.readLine().split(" ");
 
-        for (int i = 0; i < n; i++) {
-            String[] s = br.readLine().split(" ");
-            
-            switch (s[0]) {
+            switch(line[0]){
                 case "push":
-                    queue.push(Integer.parseInt(s[1]));
+                    stack.push(Integer.parseInt(line[1]));
                     break;
                 case "pop":
-                    queue.pop();
+                    stack.pop();
                     break;
                 case "size":
-                    queue.size();
+                    stack.size();
                     break;
                 case "empty":
-                    queue.empty();
+                    stack.empty();
                     break;
-                case "front":
-                    queue.front();
-                    break;
-                case "back":
-                    queue.back();
+                case "top":
+                    stack.top();
                     break;
             }
         }
