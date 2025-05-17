@@ -1,53 +1,76 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Stack;
+import java.io.IOException;
+import java.util.LinkedList;
+
+class LinkedListQueue{
+    LinkedList<Integer> Queue;
+
+    public LinkedListQueue(){
+        Queue = new LinkedList<>();
+    }
+
+    public void push(int x){
+        Queue.addLast(x);
+    }
+
+    public void pop(){
+        if(Queue.isEmpty()) System.out.println(-1);
+        else {
+            System.out.println(Queue.peek());
+            Queue.removeFirst();
+             }
+    }
+
+    public void size(){
+        System.out.println(Queue.size());
+    }
+
+    public void empty(){
+        if (Queue.isEmpty()) System.out.println(1);
+        else System.out.println(0);
+    }
+
+    public void front(){
+        if(Queue.isEmpty()) System.out.println(-1);
+        else System.out.println(Queue.peek());
+    }
+
+    public void back(){
+        if(Queue.isEmpty()) System.out.println(-1);
+        else System.out.println(Queue.peekLast());
+    }
+}
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Stack<Integer> stack = new Stack<>();
         int n = Integer.parseInt(br.readLine());
-
+        LinkedListQueue queue = new LinkedListQueue();
 
         for (int i = 0; i < n; i++) {
-            String line = br.readLine();
-            String[] tokens = line.split(" ");
-
-            switch (tokens[0]) {
+            String[] s = br.readLine().split(" ");
+            
+            switch (s[0]) {
                 case "push":
-                    stack.push(Integer.parseInt(tokens[1]));
+                    queue.push(Integer.parseInt(s[1]));
                     break;
                 case "pop":
-                    if(stack.isEmpty()){
-                        System.out.println(-1);
-                    }else{
-                        System.out.println(stack.pop());
-                    }
+                    queue.pop();
                     break;
                 case "size":
-                    if(stack.isEmpty()){
-                        System.out.println(0);
-                    }else{
-                        System.out.println(stack.size());
-                    }
+                    queue.size();
                     break;
                 case "empty":
-                    if(stack.isEmpty()){
-                        System.out.println(1);
-                    }else{
-                        System.out.println(0);
-                    }
+                    queue.empty();
                     break;
-                case "top":
-                    if(stack.isEmpty()){
-                        System.out.println(-1);
-                    }else{
-                        System.out.println(stack.peek());
-                    }
+                case "front":
+                    queue.front();
+                    break;
+                case "back":
+                    queue.back();
                     break;
             }
         }
-        br.close();
     }
 }
