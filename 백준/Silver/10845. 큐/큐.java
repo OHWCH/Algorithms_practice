@@ -1,60 +1,74 @@
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.IOException;
 import java.util.LinkedList;
-import java.util.Queue;
+
+class LinkedListQueue{
+    LinkedList<Integer> Queue;
+
+    public LinkedListQueue(){
+        Queue = new LinkedList<>();
+    }
+
+    public void push(int x){
+        Queue.addLast(x);
+    }
+
+    public void pop(){
+        if(Queue.isEmpty()) System.out.println(-1);
+        else {
+            System.out.println(Queue.peek());
+            Queue.removeFirst();
+             }
+    }
+
+    public void size(){
+        System.out.println(Queue.size());
+    }
+
+    public void empty(){
+        if (Queue.isEmpty()) System.out.println(1);
+        else System.out.println(0);
+    }
+
+    public void front(){
+        if(Queue.isEmpty()) System.out.println(-1);
+        else System.out.println(Queue.peek());
+    }
+
+    public void back(){
+        if(Queue.isEmpty()) System.out.println(-1);
+        else System.out.println(Queue.peekLast());
+    }
+}
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Queue<Integer> q = new LinkedList<>();
         int n = Integer.parseInt(br.readLine());
-
-        int last = 0;
+        LinkedListQueue queue = new LinkedListQueue();
 
         for (int i = 0; i < n; i++) {
-            String line = br.readLine();
-            String[] tokens = line.split(" ");
-
-            switch (tokens[0]) {
+            String[] s = br.readLine().split(" ");
+            
+            switch (s[0]) {
                 case "push":
-                    last = Integer.parseInt(tokens[1]);
-                    q.add(last);
+                    queue.push(Integer.parseInt(s[1]));
                     break;
                 case "pop":
-                    if (q.isEmpty()) {
-                        System.out.println(-1);
-                    }else{
-                        System.out.println(q.poll());
-                    }
+                    queue.pop();
                     break;
                 case "size":
-                    if (q.isEmpty()) {
-                        System.out.println(0);
-                    }else{
-                        System.out.println(q.size());
-                    }
+                    queue.size();
                     break;
                 case "empty":
-                    if (q.isEmpty()) {
-                        System.out.println(1);
-                    }else{
-                        System.out.println(0);
-                    }
+                    queue.empty();
                     break;
                 case "front":
-                    if (q.isEmpty()) {
-                        System.out.println(-1);
-                    }else{
-                        System.out.println(q.peek());
-                    }
+                    queue.front();
                     break;
                 case "back":
-                    if (q.isEmpty()) {
-                        System.out.println(-1);
-                    }else{
-                        System.out.println(last);
-                    }
+                    queue.back();
                     break;
             }
         }
